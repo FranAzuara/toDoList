@@ -1,33 +1,58 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { CreateTaskForm } from "./components/CreateTaskform/createTaskForm";
+import { TaskList } from "./components/TaskList/taskList";
+import { useState } from "react";
+import type { ITask } from "./types/task";
+
+const mockedTask = [
+  {
+    id: 1,
+    name: "Task 1",
+    isCompleted: false,
+  },
+  {
+    id: 2,
+    name: "Task 2",
+    isCompleted: true,
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [tasks, setTasks] = useState<ITask[]>(mockedTask);
+
+  const handleToggle = (state: boolean, id: number) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        const newTask: ITask = {
+          id: task.id,
+          name: task.name,
+          isCompleted: state,
+        };
+        return newTask;
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  };
+
+  const handleAddNewTask = (name: string) => {
+    const newTask: ITask = {
+      id: tasks.length + 1,
+      name,
+      isCompleted: false,
+    };
+
+    //const updatedTasks = tasks.concat(newTask);
+    const updatedTasks = [...tasks, newTask];
+
+    setTasks(updatedTasks);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>ToDoApp</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      Add your new task
+      <CreateTaskForm onAddNewTask={handleAddNewTask} />
+      <TaskList handleToggle={handleToggle} tasks={tasks} />
     </>
   );
 }
