@@ -15,6 +15,7 @@ export const TaskList = (props: TaskListProps) => {
           key={task.id}
           isCompleted={task.isCompleted}
           name={task.name}
+          description={task.description}
           onToggle={(state: boolean) => props.handleToggle(state, task.id)}
         />
       ))}

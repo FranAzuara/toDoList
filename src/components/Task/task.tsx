@@ -1,41 +1,60 @@
 type TaskProps = {
   name: string;
+  description?: string;
   isCompleted: boolean;
   onToggle: (state: boolean) => void;
 };
 
 export const Task = (props: TaskProps) => {
-  const { name, isCompleted, onToggle } = props;
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "2px 5px",
+        padding: "10px",
         borderBottom: "1px solid #ccc",
-        backgroundColor: isCompleted ? "#f0f0f0" : "#fff",
+        backgroundColor: props.isCompleted ? "#f0f0f0" : "#fff",
         width: "300px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "4px",
       }}
     >
-      <input
-        type="checkbox"
-        checked={isCompleted}
-        onChange={(e) => {
-          const state = e.target.checked;
-          onToggle(state);
-        }}
-      />
-      <p
-        className="break-words w-full"
+      <div
         style={{
-          textDecoration: isCompleted ? "line-through" : "none",
-          margin: 0,
-          color: "black",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        {name}
-      </p>
+        <input
+          type="checkbox"
+          checked={props.isCompleted}
+          onChange={(e) => props.onToggle(e.target.checked)}
+        />
+        <p
+          style={{
+            textDecoration: props.isCompleted ? "line-through" : "none",
+            margin: 0,
+            color: "black",
+            flex: 1,
+            marginLeft: "8px",
+          }}
+        >
+          {props.name}
+        </p>
+      </div>
+
+      {props.description && (
+        <p
+          style={{
+            fontSize: "0.85rem",
+            color: "#555",
+            margin: 0,
+            wordBreak: "break-word",
+          }}
+        >
+          {props.description}
+        </p>
+      )}
     </div>
   );
 };

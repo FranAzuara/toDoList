@@ -26,6 +26,7 @@ function App() {
         const newTask: ITask = {
           id: task.id,
           name: task.name,
+          description: task.description,
           isCompleted: state,
         };
         return newTask;
@@ -35,10 +36,11 @@ function App() {
     setTasks(updatedTasks);
   };
 
-  const handleAddNewTask = (name: string) => {
+  const handleAddNewTask = (name: string, description: string) => {
     const newTask: ITask = {
       id: tasks.length + 1,
       name,
+      description,
       isCompleted: false,
     };
 
