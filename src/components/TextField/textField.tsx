@@ -5,7 +5,8 @@ type TextFieldProps = {
 export const TextField = (props: TextFieldProps) => {
   return (
     <input
-      className="border border-white p-2 rounded"
+      className="border p-2 rounded border-white"
+      placeholder="Enter task name..."
       type="text"
       value={props.value}
       onChange={(e) => {

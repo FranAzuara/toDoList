@@ -10,12 +10,12 @@ type CreateTaskFormProps = {
 export const CreateTaskForm = (props: CreateTaskFormProps) => {
   const [newName, setNewName] = useState<string>("");
   const [newDescription, setNewDescription] = useState<string>("");
-  console.log(newDescription);
+  const [nameError, setNameError] = useState<string | null>(null);
 
   const handleChange = (text: string) => {
     const maxLength = 50;
     if (text.length > maxLength) {
-      alert(`Text exceeds ${maxLength} characters`);
+      alert(`El texto supera los ${maxLength} caracteres`);
       return;
     }
     setNewName(text);
@@ -27,10 +27,19 @@ export const CreateTaskForm = (props: CreateTaskFormProps) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    let hasError = false;
+
+    if (!newName.trim()) {
+      setNameError("Task name is required");
+      hasError = true;
+    }
+    if (hasError) return;
+
     props.onAddNewTask(newName, newDescription);
 
     setNewName("");
     setNewDescription("");
+    setNameError(null);
   };
 
   return (
@@ -43,6 +52,7 @@ export const CreateTaskForm = (props: CreateTaskFormProps) => {
           Task title
         </label>
         <TextField onChange={handleChange} value={newName} />
+        <span className="text-red-500 text-sm mt-1">{nameError}</span>
       </div>
 
       <div className="flex flex-col">

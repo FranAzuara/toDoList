@@ -52,7 +52,7 @@ function App() {
 
   return (
     <>
-      Add your new task
+      ADD YOUR NEW TASK
       <CreateTaskForm onAddNewTask={handleAddNewTask} />
       <TaskList handleToggle={handleToggle} tasks={tasks} />
     </>

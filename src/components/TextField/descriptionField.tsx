@@ -6,6 +6,7 @@ export const DescriptionField = (props: DescriptionFieldProps) => {
   return (
     <input
       className="border border-white p-2 rounded"
+      placeholder="Add a description..."
       type="text"
       id="taskDescription"
       value={props.value ?? ""}
