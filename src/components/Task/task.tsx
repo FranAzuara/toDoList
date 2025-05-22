@@ -9,13 +9,18 @@ export const Task = (props: TaskProps) => {
   return (
     <div
       style={{
+        border: "1px solid #ccc",
+        borderColor: "black",
+        borderRadius: "8px",
+        boxShadow: "0 2px 4px rgb(255, 255, 255)",
         padding: "10px",
         borderBottom: "1px solid #ccc",
         backgroundColor: props.isCompleted ? "#f0f0f0" : "#fff",
-        width: "300px",
+        width: "600px",
         display: "flex",
         flexDirection: "column",
-        gap: "4px",
+        gap: "2px",
+        marginBottom: "10px",
       }}
     >
       <div
@@ -37,6 +42,9 @@ export const Task = (props: TaskProps) => {
             color: "black",
             flex: 1,
             marginLeft: "8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
           }}
         >
           {props.name}
@@ -49,6 +57,10 @@ export const Task = (props: TaskProps) => {
             fontSize: "0.85rem",
             color: "#555",
             margin: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
             wordBreak: "break-word",
           }}
         >
